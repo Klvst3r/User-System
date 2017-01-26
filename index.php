@@ -2,6 +2,7 @@
 session_start();
 
 //require("sql/conexion.php");
+echo "Linea Modificada";
 
 if(isset($_SESSION["id_usuario"])){
 	header("Location : home.php");
