@@ -19,6 +19,13 @@
       * Ver 0.0.1
       </p>
       <p>
+      ### Info ###
+      <br/>
+      This System create a beginning of session with PHP, conect a Database with MySQL.
+      <br/>
+      The authentication is from form user and close the session with a function.
+      </p>
+      <p>
       ### Config ###
       <br/>
       To Interact with this code, you should download the SQL code and import in a DataBase.
@@ -36,7 +43,3 @@
       </p>
 </body>
 </html>
-
-
-
-
