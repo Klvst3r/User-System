@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-//require("sql/conexion.php");
-echo "Linea Modificada";
+require("sql/conexion.php");
+
 
 if(isset($_SESSION["id_usuario"])){
 	header("Location : home.php");
