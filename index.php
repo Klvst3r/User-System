@@ -3,36 +3,40 @@ session_start();
 
 require("sql/conexion.php");
 
-
 if(isset($_SESSION["id_usuario"])){
 	header("Location : home.php");
 }
 if(!empty($_POST)){
-	$usuario = mysqli_real_escape_string($mysqli,$_POST['usuario']);
-	$password = mysqli_real_escape_string($mysqli,$_POST['password']);
+	$usuario = $_POST['usuario'];
+	$password = $_POST['password'];
 	$error = '';
 
 	$sha1_pass = sha1($password);
 
 	$sql = "SELECT id, id_tipo FROM usuarios WHERE usuario = '$usuario' AND password = '$sha1_pass'";
-	$result=$mysqli->query($sql);
+	
+	$result=$conn->query($sql);
 	$rows = $result->num_rows;
 
 	if($rows > 0) {
 			$row = $result->fetch_assoc();
+
 			$_SESSION['id_usuario'] = $row['id'];
 			$_SESSION['tipo_usuario'] = $row['id_tipo'];
 			
 			header("location: welcome.php");
+			
 			} else {
-			$error = "El nombre o contraseña son incorrectos";
+			$error = "El nombre o password son incorrectos";
 		}
 
 }
 ?>
-<html>
+<!DOCTYPE html>
+<html lang="es_MX">
 	<head>
 		<title>Login</title>
+		<meta charset="utf-8"/>
 	</head>
 	
 	<body>
