@@ -24,7 +24,7 @@ if(!empty($_POST)){
 			$_SESSION['id_usuario'] = $row['id'];
 			$_SESSION['tipo_usuario'] = $row['id_tipo'];
 			
-			header("location: welcome.php");
+			header("location: home.php");
 			
 			} else {
 			$error = "El nombre o password son incorrectos";
