@@ -14,28 +14,31 @@
 	
 	if(!empty($_POST))
 	{
-		$nombre = mysqli_real_escape_string($mysqli,$_POST['nombre']);
-		$usuario = mysqli_real_escape_string($mysqli,$_POST['usuario']);
-		$password = mysqli_real_escape_string($mysqli,$_POST['password']);
+		$nombre = mysqli_real_escape_string($conn,$_POST['nombre']);
+		$usuario = mysqli_real_escape_string($conn,$_POST['usuario']);
+		$password = mysqli_real_escape_string($conn,$_POST['password']);
 		$tipo_usuario = $_POST['tipo_usuario'];
 		$sha1_pass = sha1($password);
 		
 		$error = '';
 		
 		$sqlUser = "SELECT id FROM usuarios WHERE usuario = '$usuario'";
-		$resultUser=$mysqli->query($sqlUser);
+		$resultUser=$conn->query($sqlUser);
 		$rows = $resultUser->num_rows;
 		
 		if($rows > 0) {
+			
 			$error = "El usuario ya existe";
 			} else {
 			
 			$sqlPerson = "INSERT INTO personal (nombre) VALUES('$nombre')";
-			$resultPerson=$mysqli->query($sqlPerson);
-			$idPersona = $mysqli->insert_id;
+			$resultPerson=$conn->query($sqlPerson);
+			//printf ("New Record has id %d.\n", $conn->insert_id);
+			$idPersona = $conn->insert_id;
 			
 			$sqlUsuario = "INSERT INTO usuarios (usuario, password, id_personal, id_tipo) VALUES('$usuario','$sha1_pass','$idPersona','$tipo_usuario')";
-			$resultUsuario = $mysqli->query($sqlUsuario);
+			
+			$resultUsuario = $conn->query($sqlUsuario);
 			
 			if($resultUsuario>0)
 			$bandera = true;
@@ -83,7 +86,7 @@
 		
 		<?php if($bandera) { ?>
 			<h1>Registro exitoso</h1>
-			<a href="welcome.php">Regresar</a>
+			<a href="home.php">Regresar</a>
 			
 			<?php }else{ ?>
 			<br />
